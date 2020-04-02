@@ -62,6 +62,11 @@ public class Player : MonoBehaviour
         Debug.Log(info.Id); 
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        var item = other.GetComponent<IPickable>();
+        item?.OnInteraction(); 
+    }
 
     private void OnApplicationQuit()
     {

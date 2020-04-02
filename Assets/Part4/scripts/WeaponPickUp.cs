@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponPickUp : MonoBehaviour
+public class WeaponPickUp : MonoBehaviour, IPickable
 {
     [SerializeField]
     private WeaponInfo weapon;
@@ -37,9 +37,23 @@ public class WeaponPickUp : MonoBehaviour
         animateLight = true; 
     }
 
+    private void PickupWeapon()
+    {
+        playerInfo.CallOnWeaponPickup(weapon);
+    }
+
     private void OnMouseDown()
     {
         //currentPlayer.PickUpWeapon(weapon);
-        playerInfo.CallOnWeaponPickup(weapon); 
+        PickupWeapon(); 
     }
+
+    #region ----- IPickable Interface implementation -------
+
+    public void OnInteraction()
+    {
+        PickupWeapon();
+    }
+
+    #endregion
 }
