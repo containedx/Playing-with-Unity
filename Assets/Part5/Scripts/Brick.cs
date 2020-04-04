@@ -11,7 +11,11 @@ public class Brick : MonoBehaviour
 
     [Header("Movement Atributes")]
     public BrickMovement movement;
-    public bool proocedMove; 
+    public bool proocedMove;
+
+    
+    public float leftEdge { get { return transform.position.x + leftPosition.x; } } // przy odwolaniu przyjma taka wartosc ::
+    public float rightEdge { get { return transform.position.x + rightPosition.x; } }
 
     public void Start()
     {
@@ -27,6 +31,18 @@ public class Brick : MonoBehaviour
             movement?.UpdatePosition(transform);  // transform tego obiektu 
     }
 
+    public void UpdateLine()
+    {
+        brickRenderer.positionCount = 2;
+        brickRenderer.SetPosition(0, leftPosition);   
+        brickRenderer.SetPosition(1, rightPosition);
+    }
+
+    public void UpdateLine(float leftEdge, float rightEdge)
+    {
+        leftPosition.x = leftEdge;
+        rightPosition.x = rightEdge; 
+    }
 
 }
 
