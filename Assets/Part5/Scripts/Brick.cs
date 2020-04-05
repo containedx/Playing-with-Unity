@@ -11,7 +11,9 @@ public class Brick : MonoBehaviour
 
     [Header("Movement Atributes")]
     public BrickMovement movement;
-    public bool proocedMove;
+
+    [Header("Physics")]
+    public Rigidbody brickRb; 
 
     
     public float leftEdge { get { return transform.position.x + leftPosition.x; } } // przy odwolaniu przyjma taka wartosc ::
@@ -26,9 +28,8 @@ public class Brick : MonoBehaviour
 
     public void Update()
     {
-        //aktualizacja ruchu 
-        if(proocedMove)
-            movement?.UpdatePosition(transform);  // transform tego obiektu 
+        //aktualizacja ruchu         
+        movement?.UpdatePosition(transform);  // transform tego obiektu 
     }
 
     public void UpdateLine()
@@ -41,7 +42,13 @@ public class Brick : MonoBehaviour
     public void UpdateLine(float leftEdge, float rightEdge)
     {
         leftPosition.x = leftEdge;
-        rightPosition.x = rightEdge; 
+        rightPosition.x = rightEdge;
+        UpdateLine(); 
+    }
+
+    public void AddGravity()
+    {
+        brickRb.isKinematic = false; 
     }
 
 }
@@ -50,15 +57,18 @@ public class Brick : MonoBehaviour
 public class BrickMovement
 {
     public float speed;
-    public float range; 
+    public float range;
+    public bool proocedMove;
 
     public void UpdatePosition(Transform brickTransform)
     {
-        //poruszaj od -r do r z szybkoscia speed
-        var newX = Mathf.Lerp(-range, range, Mathf.InverseLerp(-1f, 1f, Mathf.Sin(Time.time * speed))); 
+        if (proocedMove)
+        {
+            //poruszaj od -r do r z szybkoscia speed
+            var newX = Mathf.Lerp(-range, range, Mathf.InverseLerp(-1f, 1f, Mathf.Sin(Time.time * speed)));
 
-        //zmieniamy tylko X
-        brickTransform.position = new Vector3(newX, brickTransform.position.y, brickTransform.position.z); 
-        
+            //zmieniamy tylko X
+            brickTransform.position = new Vector3(newX, brickTransform.position.y, brickTransform.position.z);
+        }
     }
 }

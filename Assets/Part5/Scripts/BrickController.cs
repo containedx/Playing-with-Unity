@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class BrickController : MonoBehaviour
 {
-    [SerializeField]
-    private Brick previousBrick;
-    [SerializeField]
-    private Brick currentBrick;
+    public Brick previousBrick;  
+    public Brick currentBrick;
 
-    public float threshold; 
+    public float threshold;
+
+    public Brick brickPrefab; 
 
     public void Update()
     {
@@ -19,23 +19,44 @@ public class BrickController : MonoBehaviour
         }
     }
 
+    public void CreateNewBrick()
+    {
+        previousBrick = currentBrick;
+        currentBrick = Instantiate(brickPrefab); 
+    }
+
     public void StackBricks()
     {
+        CutBrick(); 
+
+        //CreateNewBrick(); 
+    }
+
+    public void CutBrick()
+    {
         float difference = previousBrick.leftEdge - currentBrick.leftEdge;
-        //Debug.Log(difference); 
 
-        currentBrick.proocedMove = false;
-        currentBrick.transform.position = previousBrick.transform.position + Vector3.up; 
+        currentBrick.movement.proocedMove = false;
+        currentBrick.transform.position = previousBrick.transform.position + Vector3.up;
 
-        if(difference > threshold)
+        if (difference > threshold)
         {
             currentBrick.UpdateLine(previousBrick.leftPosition.x, currentBrick.rightPosition.x - difference);
-            currentBrick.UpdateLine(); 
+            CreateLeftOver(currentBrick.leftPosition.x - difference, currentBrick.leftPosition.x);
         }
-        else if ( difference < -threshold )
+        else if (difference < -threshold)
         {
             currentBrick.UpdateLine(currentBrick.leftPosition.x - difference, previousBrick.rightPosition.x);
-            currentBrick.UpdateLine();
+            CreateLeftOver(currentBrick.rightPosition.x, currentBrick.rightPosition.x - difference);
         }
     }
+
+    public void CreateLeftOver(float leftEdge, float rightEdge)
+    {
+        Brick leftover = Instantiate(brickPrefab);
+        leftover.transform.position = currentBrick.transform.position;
+        leftover.UpdateLine(leftEdge, rightEdge);
+        leftover.AddGravity(); 
+    }
+
 }
