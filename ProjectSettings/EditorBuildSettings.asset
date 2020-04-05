@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/Part1/scenes/scene1.unity
+    guid: 5cf414c6ac8c2df4e8e03ab0562b7fc6
+  - enabled: 0
+    path: Assets/Part2/scenes/particleEffects.unity
+    guid: e14b84d436ecf11498d6a377d4ee37c7
+  - enabled: 1
+    path: Assets/Part4/scenes/SceneNoLightWarrior.unity
+    guid: d94e5857b263b8d439b1a8d144ce4aaa
   m_configObjects: {}
