@@ -9,7 +9,9 @@ public class BrickController : MonoBehaviour
 
     public float threshold;
 
-    public Brick brickPrefab; 
+    public Brick brickPrefab;
+
+    public CameraMovement cameraMovement; 
 
     public void Update()
     {
@@ -17,11 +19,21 @@ public class BrickController : MonoBehaviour
         {
             StackBricks(); 
         }
+
+        cameraMovement.UpdatePosition(currentBrick.transform.position.y); 
     }
 
     public void StackBricks()
     {
-        CutBrick(); 
+        float difference = previousBrick.leftEdge - currentBrick.leftEdge;
+        if( Mathf.Abs(difference) > previousBrick.length)
+        {
+            // GAME OVER
+            Debug.Log("GAMEOVER");
+            return; 
+        }
+
+        CutBrick( difference ); 
 
         CreateNewBrick(); 
     }
@@ -30,12 +42,13 @@ public class BrickController : MonoBehaviour
         previousBrick = currentBrick;
         currentBrick = Instantiate(brickPrefab);
         currentBrick.transform.position = previousBrick.transform.position + Vector3.up;
-        currentBrick.movement.proocedMove = true; 
+        currentBrick.movement.proocedMove = true;
+        currentBrick.UpdateLine(previousBrick.leftPosition.x, previousBrick.rightPosition.x); 
     }
 
-    public void CutBrick()
+    public void CutBrick(float difference)
     {
-        float difference = previousBrick.leftEdge - currentBrick.leftEdge;
+        
 
         currentBrick.movement.proocedMove = false;
         currentBrick.transform.position = previousBrick.transform.position + Vector3.up;
@@ -57,7 +70,8 @@ public class BrickController : MonoBehaviour
         Brick leftover = Instantiate(brickPrefab);
         leftover.transform.position = currentBrick.transform.position;
         leftover.UpdateLine(leftEdge, rightEdge);
-        leftover.AddGravity(); 
+        leftover.AddGravity();
+        Destroy(leftover.gameObject, 2f); //Destroy(object, delay); 
     }
 
 }

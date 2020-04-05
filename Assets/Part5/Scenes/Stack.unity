@@ -255,7 +255,7 @@ MonoBehaviour:
   movement:
     speed: 3
     range: 1.8
-    proocedMove: 0
+    proocedMove: 1
   brickRb: {fileID: 460443243}
 --- !u!4 &460443242
 Transform:
@@ -265,7 +265,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 460443239}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.84, y: -3, z: 0}
+  m_LocalPosition: {x: -0.84, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -380,6 +380,7 @@ GameObject:
   m_Component:
   - component: {fileID: 916235027}
   - component: {fileID: 916235026}
+  - component: {fileID: 916235028}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -404,6 +405,7 @@ MonoBehaviour:
   threshold: 0.1
   brickPrefab: {fileID: 543073524518994785, guid: 560d3d72f8d9df244876c462700356b8,
     type: 3}
+  cameraMovement: {fileID: 916235028}
 --- !u!4 &916235027
 Transform:
   m_ObjectHideFlags: 0
@@ -418,6 +420,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &916235028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 916235025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f9d8eb767373104fa8f3da240870b45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneCamera: {fileID: 463304561}
+  heightModifier: 3.5
+  speed: 2
 --- !u!114 &1345267299 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 543073524518994785, guid: 560d3d72f8d9df244876c462700356b8,
@@ -537,7 +554,7 @@ PrefabInstance:
     - target: {fileID: 543073524518994784, guid: 560d3d72f8d9df244876c462700356b8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 543073524518994784, guid: 560d3d72f8d9df244876c462700356b8,
         type: 3}

@@ -19,11 +19,11 @@ public class Brick : MonoBehaviour
     public float leftEdge { get { return transform.position.x + leftPosition.x; } } // przy odwolaniu przyjma taka wartosc ::
     public float rightEdge { get { return transform.position.x + rightPosition.x; } }
 
+    public float length { get { return (leftPosition - rightPosition).magnitude; } }
+
     public void Start()
     {
-        brickRenderer.positionCount = 2; // bo zawsze 2 pozycje 
-        brickRenderer.SetPosition(0, leftPosition);   //przypisanie pozycji 
-        brickRenderer.SetPosition(1, rightPosition);
+      
     }
 
     public void Update()
