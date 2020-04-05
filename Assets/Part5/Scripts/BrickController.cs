@@ -19,17 +19,18 @@ public class BrickController : MonoBehaviour
         }
     }
 
-    public void CreateNewBrick()
-    {
-        previousBrick = currentBrick;
-        currentBrick = Instantiate(brickPrefab); 
-    }
-
     public void StackBricks()
     {
         CutBrick(); 
 
-        //CreateNewBrick(); 
+        CreateNewBrick(); 
+    }
+    public void CreateNewBrick()
+    {
+        previousBrick = currentBrick;
+        currentBrick = Instantiate(brickPrefab);
+        currentBrick.transform.position = previousBrick.transform.position + Vector3.up;
+        currentBrick.movement.proocedMove = true; 
     }
 
     public void CutBrick()
