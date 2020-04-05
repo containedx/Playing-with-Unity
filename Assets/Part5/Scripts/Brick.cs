@@ -46,6 +46,12 @@ public class Brick : MonoBehaviour
         UpdateLine(); 
     }
 
+    public void UpdateColor(Color color)
+    {
+        brickRenderer.startColor = color;
+        brickRenderer.endColor = color;       
+    }
+
     public void AddGravity()
     {
         brickRb.isKinematic = false; 

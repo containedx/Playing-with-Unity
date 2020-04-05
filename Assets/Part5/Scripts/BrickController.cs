@@ -11,7 +11,14 @@ public class BrickController : MonoBehaviour
 
     public Brick brickPrefab;
 
-    public CameraMovement cameraMovement; 
+    public CameraMovement cameraMovement;
+    public ColorPicker colorPicker;
+
+    public void Start()
+    {
+        colorPicker.Init();
+        currentBrick.UpdateColor(colorPicker.GetCurrentColor());
+    }
 
     public void Update()
     {
@@ -39,17 +46,18 @@ public class BrickController : MonoBehaviour
     }
     public void CreateNewBrick()
     {
+        colorPicker.IncreaseStep();
+
         previousBrick = currentBrick;
         currentBrick = Instantiate(brickPrefab);
         currentBrick.transform.position = previousBrick.transform.position + Vector3.up;
         currentBrick.movement.proocedMove = true;
-        currentBrick.UpdateLine(previousBrick.leftPosition.x, previousBrick.rightPosition.x); 
+        currentBrick.UpdateLine(previousBrick.leftPosition.x, previousBrick.rightPosition.x);
+        currentBrick.UpdateColor(colorPicker.GetCurrentColor()); 
     }
 
     public void CutBrick(float difference)
     {
-        
-
         currentBrick.movement.proocedMove = false;
         currentBrick.transform.position = previousBrick.transform.position + Vector3.up;
 
@@ -71,6 +79,7 @@ public class BrickController : MonoBehaviour
         leftover.transform.position = currentBrick.transform.position;
         leftover.UpdateLine(leftEdge, rightEdge);
         leftover.AddGravity();
+        leftover.UpdateColor(colorPicker.GetCurrentColor()); 
         Destroy(leftover.gameObject, 2f); //Destroy(object, delay); 
     }
 
