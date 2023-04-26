@@ -1,10 +1,13 @@
 ##### Hello World !
-```
+
 I am happy to present effects of me having fun with basic mechanics, physics, 
 animations and many other components which Unity Engine provides.
 
+All thanks to [Grarantanna](https://www.grarantanna.pl/#rob-gry-wideo) series of webinars 
+promoting learning game development I was lucky to attend.
+
 Each Part is another scene including presentation of various fun things. 
-```
+
 :fire: :bomb:
 ######  *Below a little demo:* 
 <br><br>
